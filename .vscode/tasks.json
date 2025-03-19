@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "source_ros",
+            "type": "shell",
+            "command": "source /opt/ros/jazzy/setup.bash && source ${workspaceFolder}/install/setup.bash",
+            "problemMatcher": []
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "cd ${workspaceFolder} && colcon build --packages-select ackermann_robot_pkg",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+} 

@@ -1,0 +1,12 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+The language is Python3.
+Use ROS2 conventions.
+Source files are all in /home/mw/ros2_ws/src
+<!-- The corresponding client is in /home/mw/picar_flutter. -->

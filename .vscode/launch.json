@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: ROS2 Node",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/ackermann_robot_pkg/ackermann_robot_pkg/control_ackermann.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/install/ackermann_robot_pkg/lib/python3.12/site-packages:${env:PYTHONPATH}",
+                "AMENT_PREFIX_PATH": "${workspaceFolder}/install/ackermann_robot_pkg:${env:AMENT_PREFIX_PATH}"
+            },
+            "preLaunchTask": "source_ros"
+        },
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+} 
