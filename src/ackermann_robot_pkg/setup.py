@@ -37,9 +37,7 @@ setup(
     entry_points={
         'console_scripts': [
             'control_ackermann = ackermann_robot_pkg.control_ackermann:main',
-            'test_gazebo_sim = ackermann_robot_pkg.test_gazebo_sim:main',
-            'test_wheel_control = ackermann_robot_pkg.test_wheel_control:main',
-            'test_direct_drive = ackermann_robot_pkg.test_direct_drive:main',
+            'auto_mode_toggle = ackermann_robot_pkg.auto_mode_toggle:main',
         ],
     },
 )

@@ -21,6 +21,16 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false
-        }
-    ]
+        },
+        {
+            "name": "ROS: Ackermann TEST",
+            "type": "ros",
+            "request": "launch",
+            "target": "/home/mw/ros2_ws/src/ackermann_robot_pkg/launch/ackermann_gazebo.launch.py"
+        },
+        {
+            "name": "ROS: Attach",
+            "type": "ros",
+            "request": "attach"
+        }    ]
 } 

@@ -54,6 +54,16 @@ def generate_launch_description():
         ]
     )
     
+    # Auto mode toggle node
+    auto_mode_toggle = Node(
+        package='ackermann_robot_pkg',
+        executable='auto_mode_toggle',
+        name='auto_mode_toggle',
+        output='screen',
+        prefix='xterm -e',
+        parameters=[{'use_sim_time': True}]
+    )
+    
     # Teleop keyboard - Use model-specific cmd_vel topic
     teleop_node = Node(
         package='teleop_twist_keyboard',
@@ -112,6 +122,15 @@ def generate_launch_description():
         output='screen'
     )
     
+    # Bridge for auto mode control
+    auto_mode_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='auto_mode_bridge',
+        arguments=['/auto_mode@std_msgs/msg/Bool@gz.msgs.Boolean'],
+        output='screen'
+    )
+    
     # Add bridge for odometry
     odom_bridge = Node(
         package='ros_gz_bridge',
@@ -130,6 +149,13 @@ def generate_launch_description():
         output='screen'
     )
     
+    # Print usage instructions
+    print("\n========== AUTONOMOUS MODE INSTRUCTIONS ==========")
+    print("In the auto_mode_toggle terminal window:")
+    print("- Press 'a' to toggle autonomous obstacle avoidance mode")
+    print("- Press 'q' to quit the auto mode toggle node")
+    print("================================================\n")
+    
     return LaunchDescription([
         gazebo_model_path,
         gz_sim_resource_path,
@@ -140,8 +166,10 @@ def generate_launch_description():
         cmd_vel_bridge,
         left_steer_bridge,
         right_steer_bridge,
+        auto_mode_bridge,
         odom_bridge,
         tf_bridge,
         controller,
-        teleop_node
+        teleop_node,
+        auto_mode_toggle
     ])

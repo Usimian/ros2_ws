@@ -16,6 +16,11 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "source ROS setup",
+            "type": "shell",
+            "command": "source /opt/ros/jazzy/setup.bash && source ${workspaceFolder}/install/setup.bash"
         }
     ]
 } 
