@@ -57,14 +57,15 @@ class AckermannController(Node):
         self.obstacle_detected = False
         self.min_distance = float('inf')
         self.current_angular_z = 0.0
+        self.last_cmd_time = self.get_clock().now()
         
         # Ackermann parameters
         self.wheel_base = 0.3  # Distance between front and rear axles
         self.wheel_track = 0.26  # Distance between left and right wheels
         self.max_steering_angle = 0.5  # Maximum steering angle in radians
         
-        # Timer for publishing commands
-        self.timer = self.create_timer(0.1, self.control_loop)
+        # Timer for processing obstacle avoidance
+        self.timer = self.create_timer(0.1, self.safety_check)
         
         # Debug variables
         self.camera_count = 0
@@ -112,6 +113,7 @@ class AckermannController(Node):
     def cmd_vel_callback(self, msg):
         # Store the angular velocity for steering calculation
         self.current_angular_z = msg.angular.z
+        self.last_cmd_time = self.get_clock().now()
         
         # Calculate steering angle based on angular velocity
         # This is a simplified Ackermann steering model
@@ -168,36 +170,18 @@ class AckermannController(Node):
         right_cmd.data = right_angle
         self.right_steer_pub.publish(right_cmd)
     
-    def control_loop(self):
-        # Basic obstacle avoidance
+    def safety_check(self):
+        # Only perform obstacle avoidance if needed
         if self.obstacle_detected:
-            # Stop and turn
-            twist = Twist()
-            twist.linear.x = 0.0
-            twist.angular.z = 0.5  # Turn left
-            self.vel_pub.publish(twist)
+            # Log the detected obstacle
+            self.get_logger().warn(f'Obstacle detected at {self.min_distance:.2f}m - Safety system active')
             
-            # Update steering based on the new angular velocity
-            steering_angle = self.calculate_steering_angle(0.0, 0.5)
-            self.publish_steering_commands(steering_angle)
-            
-            self.get_logger().debug('Obstacle avoidance: turning left')
+            # Emergency stop could be implemented here if needed
+            # For now, we just let the teleop control continue but log warnings
         else:
-            # If no obstacle is detected and no command has been received recently,
-            # publish a small forward velocity to test movement
-            twist = Twist()
-            twist.linear.x = 1.0  # Increased forward movement
-            twist.angular.z = 0.0
-            self.vel_pub.publish(twist)
-            
-            # Update steering for straight movement
-            steering_angle = self.calculate_steering_angle(1.0, 0.0)
-            self.publish_steering_commands(steering_angle)
-            
-            self.get_logger().info('Publishing test movement command: linear.x=1.0, angular.z=0.0')
-            
-            # Log the current state
-            self.get_logger().info(f'Current state: obstacle_detected={self.obstacle_detected}, min_distance={self.min_distance:.2f}m')
+            # Just log the current state occasionally for debugging
+            if (self.get_clock().now().nanoseconds // 1000000000) % 10 == 0:  # Log every ~10 seconds
+                self.get_logger().debug(f'Safety system monitoring: no obstacles detected, min_distance={self.min_distance:.2f}m')
 
 def main(args=None):
     rclpy.init(args=args)

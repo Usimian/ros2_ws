@@ -83,7 +83,7 @@
 
     <!-- Front left wheel -->
     <link name="front_left_wheel">
-      <pose>0.15 0.13 0.05 -1.5707 0 0</pose>
+      <pose>0.15 0.13 0.05 0 0 0</pose>
       <inertial>
         <mass>0.5</mass>
         <inertia>
@@ -96,6 +96,7 @@
         </inertia>
       </inertial>
       <collision name="collision">
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
           <cylinder>
             <radius>0.05</radius>
@@ -104,6 +105,7 @@
         </geometry>
       </collision>
       <visual name="visual">
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
           <cylinder>
             <radius>0.05</radius>
@@ -136,7 +138,7 @@
 
     <!-- Front right wheel -->
     <link name="front_right_wheel">
-      <pose>0.15 -0.13 0.05 -1.5707 0 0</pose>
+      <pose>0.15 -0.13 0.05 0 0 0</pose>
       <inertial>
         <mass>0.5</mass>
         <inertia>
@@ -149,6 +151,7 @@
         </inertia>
       </inertial>
       <collision name="collision">
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
           <cylinder>
             <radius>0.05</radius>
@@ -157,6 +160,7 @@
         </geometry>
       </collision>
       <visual name="visual">
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
           <cylinder>
             <radius>0.05</radius>
@@ -189,7 +193,7 @@
 
     <!-- Rear left wheel -->
     <link name="rear_left_wheel">
-      <pose>-0.15 0.13 0.05 -1.5707 0 0</pose>
+      <pose>-0.15 0.13 0.05 0 0 0</pose>
       <inertial>
         <mass>0.5</mass>
         <inertia>
@@ -202,6 +206,7 @@
         </inertia>
       </inertial>
       <collision name="collision">
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
           <cylinder>
             <radius>0.05</radius>
@@ -210,6 +215,7 @@
         </geometry>
       </collision>
       <visual name="visual">
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
           <cylinder>
             <radius>0.05</radius>
@@ -226,7 +232,7 @@
 
     <!-- Rear right wheel -->
     <link name="rear_right_wheel">
-      <pose>-0.15 -0.13 0.05 -1.5707 0 0</pose>
+      <pose>-0.15 -0.13 0.05 0 0 0</pose>
       <inertial>
         <mass>0.5</mass>
         <inertia>
@@ -239,6 +245,7 @@
         </inertia>
       </inertial>
       <collision name="collision">
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
           <cylinder>
             <radius>0.05</radius>
@@ -247,6 +254,7 @@
         </geometry>
       </collision>
       <visual name="visual">
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
           <cylinder>
             <radius>0.05</radius>
@@ -294,8 +302,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <dynamics>
-          <friction>0.05</friction>
-          <damping>0.1</damping>
+          <friction>0.01</friction>
+          <damping>0.05</damping>
         </dynamics>
       </axis>
     </joint>
@@ -307,8 +315,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <dynamics>
-          <friction>0.05</friction>
-          <damping>0.1</damping>
+          <friction>0.01</friction>
+          <damping>0.05</damping>
         </dynamics>
       </axis>
     </joint>
@@ -320,8 +328,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <dynamics>
-          <friction>0.05</friction>
-          <damping>0.1</damping>
+          <friction>0.01</friction>
+          <damping>0.05</damping>
         </dynamics>
       </axis>
     </joint>
@@ -333,26 +341,31 @@
       <axis>
         <xyz>0 1 0</xyz>
         <dynamics>
-          <friction>0.05</friction>
-          <damping>0.1</damping>
+          <friction>0.01</friction>
+          <damping>0.05</damping>
         </dynamics>
       </axis>
     </joint>
 
     <!-- Ackermann steering plugin -->
     <plugin filename="libgz-sim8-ackermann-steering-system.so" name="gz::sim::systems::AckermannSteering">
+      <left_joint>front_left_wheel_joint</left_joint>
+      <left_joint>rear_left_wheel_joint</left_joint>
+      <right_joint>front_right_wheel_joint</right_joint>
+      <right_joint>rear_right_wheel_joint</right_joint>
       <left_steering_joint>front_left_steer_joint</left_steering_joint>
       <right_steering_joint>front_right_steer_joint</right_steering_joint>
-      <left_front_wheel_joint>front_left_wheel_joint</left_front_wheel_joint>
-      <right_front_wheel_joint>front_right_wheel_joint</right_front_wheel_joint>
-      <left_rear_wheel_joint>rear_left_wheel_joint</left_rear_wheel_joint>
-      <right_rear_wheel_joint>rear_right_wheel_joint</right_rear_wheel_joint>
+      <kingpin_width>0.26</kingpin_width>
+      <steering_limit>0.5</steering_limit>
       <wheel_base>0.3</wheel_base>
       <wheel_separation>0.26</wheel_separation>
       <wheel_radius>0.05</wheel_radius>
-      <steering_limit>0.5</steering_limit>
-      <wheel_torque>5.0</wheel_torque>
-      <topic>model/ackermann_robot/cmd_vel</topic>
+      <wheel_torque>20.0</wheel_torque>
+      <cmd_vel_topic>/model/ackermann_robot/cmd_vel</cmd_vel_topic>
+      <min_velocity>-2</min_velocity>
+      <max_velocity>2</max_velocity>
+      <min_acceleration>-3</min_acceleration>
+      <max_acceleration>3</max_acceleration>
     </plugin>
   </model>
 </sdf> 

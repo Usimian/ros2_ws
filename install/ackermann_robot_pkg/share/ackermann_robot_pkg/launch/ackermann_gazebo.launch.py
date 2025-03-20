@@ -26,6 +26,12 @@ def generate_launch_description():
         value=os.path.join(pkg_dir, 'models')
     )
     
+    # Enable verbose Gazebo logging
+    gz_verbose = SetEnvironmentVariable(
+        name='GZ_VERBOSE',
+        value='3'
+    )
+    
     # Print the model paths for debugging
     print(f"Setting GAZEBO_MODEL_PATH to: {os.path.join(pkg_dir, 'models')}")
     print(f"Setting GZ_SIM_RESOURCE_PATH to: {os.path.join(pkg_dir, 'models')}")
@@ -48,7 +54,7 @@ def generate_launch_description():
         ]
     )
     
-    # Teleop keyboard - Use standard cmd_vel topic
+    # Teleop keyboard - Use model-specific cmd_vel topic
     teleop_node = Node(
         package='teleop_twist_keyboard',
         executable='teleop_twist_keyboard',
@@ -79,7 +85,7 @@ def generate_launch_description():
         output='screen'
     )
     
-    # Bridge ROS 2 cmd_vel to Gazebo (standard)
+    # Bridge ROS 2 cmd_vel to Gazebo
     cmd_vel_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -127,6 +133,7 @@ def generate_launch_description():
     return LaunchDescription([
         gazebo_model_path,
         gz_sim_resource_path,
+        gz_verbose,
         gazebo,
         camera_bridge,
         ultrasonic_bridge,

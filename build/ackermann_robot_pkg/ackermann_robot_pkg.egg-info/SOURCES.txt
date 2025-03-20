@@ -10,9 +10,12 @@ setup.py
 ../../build/ackermann_robot_pkg/ackermann_robot_pkg.egg-info/zip-safe
 ackermann_robot_pkg/__init__.py
 ackermann_robot_pkg/control_ackermann.py
+ackermann_robot_pkg/test_direct_drive.py
 ackermann_robot_pkg/test_gazebo_sim.py
+ackermann_robot_pkg/test_wheel_control.py
 config/ackermann_controller.yaml
 launch/ackermann_gazebo.launch.py
+launch/test_joints.launch.py
 models/ackermann_robot/model.config
 models/ackermann_robot/model.sdf
 resource/ackermann_robot_pkg

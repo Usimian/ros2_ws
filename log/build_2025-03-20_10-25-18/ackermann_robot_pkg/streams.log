@@ -1,0 +1,38 @@
+[0.606s] Invoking command in '/home/mw/ros2_ws/src/ackermann_robot_pkg': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/mw/ros2_ws/build/ackermann_robot_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mw/ros2_ws/install/ackermann_robot_pkg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ackermann_robot_pkg build --build-base /home/mw/ros2_ws/build/ackermann_robot_pkg/build install --record /home/mw/ros2_ws/build/ackermann_robot_pkg/install.log --single-version-externally-managed install_data
+[0.781s] running egg_info
+[0.794s] writing ../../build/ackermann_robot_pkg/ackermann_robot_pkg.egg-info/PKG-INFO
+[0.794s] writing dependency_links to ../../build/ackermann_robot_pkg/ackermann_robot_pkg.egg-info/dependency_links.txt
+[0.794s] writing entry points to ../../build/ackermann_robot_pkg/ackermann_robot_pkg.egg-info/entry_points.txt
+[0.794s] writing requirements to ../../build/ackermann_robot_pkg/ackermann_robot_pkg.egg-info/requires.txt
+[0.794s] writing top-level names to ../../build/ackermann_robot_pkg/ackermann_robot_pkg.egg-info/top_level.txt
+[0.821s] reading manifest file '../../build/ackermann_robot_pkg/ackermann_robot_pkg.egg-info/SOURCES.txt'
+[0.821s] writing manifest file '../../build/ackermann_robot_pkg/ackermann_robot_pkg.egg-info/SOURCES.txt'
+[0.821s] running build
+[0.821s] running build_py
+[0.822s] copying ackermann_robot_pkg/__init__.py -> /home/mw/ros2_ws/build/ackermann_robot_pkg/build/lib/ackermann_robot_pkg
+[0.822s] copying ackermann_robot_pkg/control_ackermann.py -> /home/mw/ros2_ws/build/ackermann_robot_pkg/build/lib/ackermann_robot_pkg
+[0.822s] copying ackermann_robot_pkg/test_direct_drive.py -> /home/mw/ros2_ws/build/ackermann_robot_pkg/build/lib/ackermann_robot_pkg
+[0.822s] copying ackermann_robot_pkg/test_wheel_control.py -> /home/mw/ros2_ws/build/ackermann_robot_pkg/build/lib/ackermann_robot_pkg
+[0.822s] copying ackermann_robot_pkg/test_gazebo_sim.py -> /home/mw/ros2_ws/build/ackermann_robot_pkg/build/lib/ackermann_robot_pkg
+[0.822s] running install
+[0.825s] running install_lib
+[0.839s] running install_data
+[0.839s] copying resource/ackermann_robot_pkg -> /home/mw/ros2_ws/install/ackermann_robot_pkg/share/ament_index/resource_index/packages
+[0.839s] copying package.xml -> /home/mw/ros2_ws/install/ackermann_robot_pkg/share/ackermann_robot_pkg
+[0.839s] copying launch/ackermann_gazebo.launch.py -> /home/mw/ros2_ws/install/ackermann_robot_pkg/share/ackermann_robot_pkg/launch
+[0.839s] copying launch/test_joints.launch.py -> /home/mw/ros2_ws/install/ackermann_robot_pkg/share/ackermann_robot_pkg/launch
+[0.839s] copying worlds/ackermann_world.sdf -> /home/mw/ros2_ws/install/ackermann_robot_pkg/share/ackermann_robot_pkg/worlds
+[0.839s] copying models/ackermann_robot/model.sdf -> /home/mw/ros2_ws/install/ackermann_robot_pkg/share/ackermann_robot_pkg/models/ackermann_robot
+[0.839s] copying models/ackermann_robot/model.config -> /home/mw/ros2_ws/install/ackermann_robot_pkg/share/ackermann_robot_pkg/models/ackermann_robot
+[0.840s] copying urdf/ackermann_robot.urdf.xacro -> /home/mw/ros2_ws/install/ackermann_robot_pkg/share/ackermann_robot_pkg/urdf
+[0.840s] copying config/ackermann_controller.yaml -> /home/mw/ros2_ws/install/ackermann_robot_pkg/share/ackermann_robot_pkg/config
+[0.840s] running install_egg_info
+[0.853s] removing '/home/mw/ros2_ws/install/ackermann_robot_pkg/lib/python3.12/site-packages/ackermann_robot_pkg-0.0.0-py3.12.egg-info' (and everything under it)
+[0.853s] Copying ../../build/ackermann_robot_pkg/ackermann_robot_pkg.egg-info to /home/mw/ros2_ws/install/ackermann_robot_pkg/lib/python3.12/site-packages/ackermann_robot_pkg-0.0.0-py3.12.egg-info
+[0.853s] running install_scripts
+[0.937s] Installing control_ackermann script to /home/mw/ros2_ws/install/ackermann_robot_pkg/lib/ackermann_robot_pkg
+[0.937s] Installing test_direct_drive script to /home/mw/ros2_ws/install/ackermann_robot_pkg/lib/ackermann_robot_pkg
+[0.937s] Installing test_gazebo_sim script to /home/mw/ros2_ws/install/ackermann_robot_pkg/lib/ackermann_robot_pkg
+[0.937s] Installing test_wheel_control script to /home/mw/ros2_ws/install/ackermann_robot_pkg/lib/ackermann_robot_pkg
+[0.937s] writing list of installed files to '/home/mw/ros2_ws/build/ackermann_robot_pkg/install.log'
+[0.952s] Invoked command in '/home/mw/ros2_ws/src/ackermann_robot_pkg' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/mw/ros2_ws/build/ackermann_robot_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mw/ros2_ws/install/ackermann_robot_pkg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ackermann_robot_pkg build --build-base /home/mw/ros2_ws/build/ackermann_robot_pkg/build install --record /home/mw/ros2_ws/build/ackermann_robot_pkg/install.log --single-version-externally-managed install_data
