@@ -294,7 +294,7 @@ class AckermannController(Node):
                 # Continue turning
                 turn_rate = self.turn_direction * self.turn_speed
                 # Make sharper turns with less forward motion for better obstacle avoidance
-                self.send_velocity_command(0.1, turn_rate)
+                self.send_velocity_command(0.5, turn_rate)
                 
         elif self.auto_state == "BACKING_UP":
             # Back up for about 1 meter
