@@ -65,6 +65,7 @@ class AckermannController(Node):
         self.obstacle_detected = False
         self.min_distance = float('inf')
         self.current_angular_z = 0.0
+
         self.last_cmd_time = self.get_clock().now()
         self.auto_mode = False
         self.obstacle_directions = []  # Will store laser scan data for obstacle directions
@@ -75,8 +76,8 @@ class AckermannController(Node):
         self.max_steering_angle = 0.5  # Maximum steering angle in radians
         
         # Auto navigation parameters
-        self.forward_speed = 0.3  # Default forward speed in auto mode (reduced for safety)
-        self.turn_speed = 0.5     # Default turning speed in auto mode (increased for better turning)
+        self.forward_speed = 1.0  # Default forward speed in auto mode (reduced for safety)
+        self.turn_speed = 1.0     # Default turning speed in auto mode (increased for better turning)
         self.obstacle_threshold = 1.2  # Distance threshold for obstacle detection (increased for earlier detection)
         self.min_safe_distance = 0.5   # Minimum safe distance to obstacles
         self.critical_distance = 0.3   # Critical distance where robot will back up
@@ -221,7 +222,6 @@ class AckermannController(Node):
     
     def navigation_control(self):
         # Handle both safety and auto navigation
-        self.get_logger().info("NAVIGATION_CONTROL EXECUTED IN MAIN LOOP")
         if self.auto_mode:
             self.auto_navigation()
         else:
@@ -237,7 +237,7 @@ class AckermannController(Node):
             # For now, we just let the teleop control continue but log warnings
         else:
             # Just log the current state occasionally for debugging
-            if (self.get_clock().now().nanoseconds // 1000000000) % 10 == 0:  # Log every ~10 seconds
+            if (self.get_clock().now().to_msg().sec) % 10 == 0:  # Log every ~10 seconds
                 self.get_logger().debug(f'Safety system monitoring: no obstacles detected, min_distance={self.min_distance:.2f}m')
     
     def auto_navigation(self):
@@ -248,7 +248,7 @@ class AckermannController(Node):
             
         # Implement a simple state machine for obstacle avoidance
         current_time = self.get_clock().now()
-        
+        timestamp = current_time.to_msg()
         # First check for critical distance - this overrides any current state
         if self.obstacle_detected and self.min_distance < self.critical_distance and self.auto_state != "BACKING_UP":
             self.get_logger().warn(f'TOO CLOSE to obstacle ({self.min_distance:.2f}m) - BACKING UP!')
@@ -276,7 +276,9 @@ class AckermannController(Node):
         elif self.auto_state == "TURNING":
             # Turn to avoid obstacle
             turn_duration = 3.0  # seconds (increased for more complete turns)
-            time_diff = (current_time.nanoseconds - self.state_start_time.nanoseconds) / 1e9
+            current_sec = current_time.to_msg().sec + current_time.to_msg().nanosec / 1e9
+            start_sec = self.state_start_time.to_msg().sec + self.state_start_time.to_msg().nanosec / 1e9
+            time_diff = current_sec - start_sec
             
             if time_diff > turn_duration:
                 # Done turning, go back to forward
@@ -298,7 +300,9 @@ class AckermannController(Node):
             # Back up for about 1 meter
             backup_speed = -0.2  # Negative for reverse
             backup_time = 5.0    # seconds - adjust based on speed to get ~1 meter
-            time_diff = (current_time.nanoseconds - self.state_start_time.nanoseconds) / 1e9
+            current_sec = current_time.to_msg().sec + current_time.to_msg().nanosec / 1e9
+            start_sec = self.state_start_time.to_msg().sec + self.state_start_time.to_msg().nanosec / 1e9
+            time_diff = current_sec - start_sec
             
             # Calculate approximate distance traveled (time * speed)
             self.state_distance_traveled = abs(backup_speed) * time_diff

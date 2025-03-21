@@ -149,6 +149,17 @@ def generate_launch_description():
         output='screen'
     )
     
+    # Add bridge for clock
+    # The [gz.msgs.Clock] syntax means it's a subscriber to Gazebo clock
+    # which then publishes to ROS2 /clock as rosgraph_msgs/msg/Clock
+    clock_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='clock_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen'
+    )
+    
     # Print usage instructions
     print("\n========== AUTONOMOUS MODE INSTRUCTIONS ==========")
     print("In the auto_mode_toggle terminal window:")
@@ -169,6 +180,7 @@ def generate_launch_description():
         auto_mode_bridge,
         odom_bridge,
         tf_bridge,
+        clock_bridge,
         controller,
         teleop_node,
         auto_mode_toggle

@@ -17,6 +17,10 @@
     </plugin>
     <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu">
     </plugin>
+    
+    <!-- Add clock plugin to publish simulation time -->
+    <plugin filename="libgz-sim-clock-system.so" name="gz::sim::systems::Clock">
+    </plugin>
 
     <light type="directional" name="sun">
       <cast_shadows>true</cast_shadows>
@@ -68,7 +72,7 @@
 
     <!-- Add some obstacles -->
     <model name="box1">
-      <pose>3 2 0.5 0 0 0</pose>
+      <pose>3 0 0.5 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
@@ -80,7 +84,7 @@
         <visual name="visual">
           <geometry>
             <box>
-              <size>1 1 1</size>
+              <size>1 5 1</size>
             </box>
           </geometry>
           <material>
@@ -93,7 +97,7 @@
     </model>
 
     <model name="box2">
-      <pose>-2 -3 0.5 0 0 0</pose>
+      <pose>-3 0 0.5 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
@@ -105,7 +109,57 @@
         <visual name="visual">
           <geometry>
             <box>
+              <size>1 5 1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+            <specular>1 0 0 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="box3">
+      <pose>0 3 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
               <size>1 1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+            <specular>1 0 0 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="box4">
+      <pose>0 -3 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5 1 1</size>
             </box>
           </geometry>
           <material>
