@@ -1,3 +1,0 @@
-[console_scripts]
-auto_mode_toggle = ackermann_robot_pkg.auto_mode_toggle:main
-control_ackermann = ackermann_robot_pkg.control_ackermann:main

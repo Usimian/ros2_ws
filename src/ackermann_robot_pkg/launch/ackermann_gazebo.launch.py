@@ -11,30 +11,26 @@ def generate_launch_description():
     pkg_dir = get_package_share_directory('ackermann_robot_pkg')
     world_file = os.path.join(pkg_dir, 'worlds', 'ackermann_world.sdf')
     
-    # Set Gazebo model path
-    model_path = os.path.join(pkg_dir, 'models')
+    # Get the current GAZEBO_MODEL_PATH from the environment
+    current_model_path = "/home/mw/gazebo_models_worlds_collection/models"
     
-    # Environment variables for the model path
+    # Environment variables for the model path - include both paths
     gazebo_model_path = SetEnvironmentVariable(
         name='GAZEBO_MODEL_PATH',
-        value=os.path.join(pkg_dir, 'models')
+        value=f"{os.path.join(pkg_dir, 'models')}:{current_model_path}"
     )
-    
-    # Set GZ_SIM_RESOURCE_PATH for Gazebo Sim
     gz_sim_resource_path = SetEnvironmentVariable(
         name='GZ_SIM_RESOURCE_PATH',
-        value=os.path.join(pkg_dir, 'models')
+        value=f"{os.path.join(pkg_dir, 'models')}:{current_model_path}"
     )
-    
-    # Enable verbose Gazebo logging
+        # Enable verbose Gazebo logging
     gz_verbose = SetEnvironmentVariable(
         name='GZ_VERBOSE',
         value='3'
     )
     
     # Print the model paths for debugging
-    print(f"Setting GAZEBO_MODEL_PATH to: {os.path.join(pkg_dir, 'models')}")
-    print(f"Setting GZ_SIM_RESOURCE_PATH to: {os.path.join(pkg_dir, 'models')}")
+    print(f"Setting GAZEBO_MODEL_PATH to: {os.path.join(pkg_dir, 'models')}:{current_model_path}")
     
     # Start Gazebo with verbose output
     gazebo = ExecuteProcess(
